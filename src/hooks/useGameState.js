@@ -23,7 +23,7 @@ export const useGameState = () => {
   const addChips = (amount) => setGameState(prev => ({ ...prev, chips: prev.chips + amount }));
   const removeChips = (amount) => setGameState(prev => ({ ...prev, chips: Math.max(0, prev.chips - amount) }));
   const addToTeam = (pokemon) => {
-    if (gameState.team.length < 6) {
+    if (pokemon && gameState.team.length < 6) {
       setGameState(prev => ({ ...prev, team: [...prev.team, { ...pokemon, currentHp: pokemon.stats.hp }] }));
     }
   };

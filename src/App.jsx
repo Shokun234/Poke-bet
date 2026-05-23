@@ -11,11 +11,18 @@ function App() {
 
   useEffect(() => {
     const initTeam = async () => {
-      if (gameState.team.length === 0) {
-        const bulbasaur = await fetchPokemonData(1);
-        addToTeam(bulbasaur);
+      try {
+        if (gameState.team.length === 0) {
+          const bulbasaur = await fetchPokemonData(1);
+          if (bulbasaur) {
+            addToTeam(bulbasaur);
+          }
+        }
+      } catch (error) {
+        console.error("Failed to initialize team:", error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
     initTeam();
   }, []);

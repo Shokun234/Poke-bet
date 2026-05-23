@@ -26,7 +26,12 @@ const AdventureView = ({ gameState, addChips, removeChips, addToTeam, updatePoke
   const triggerEncounter = async () => {
     setIsWalking(false);
     const data = await fetchPokemonData(getRandomKantoId());
-    setEncounter(data);
+    if (data) {
+      setEncounter(data);
+    } else {
+      setLogs(prev => ['A wild Pokemon fled!', ...prev.slice(0, 3)]);
+      setIsWalking(true);
+    }
   };
 
   const handleFight = (allIn) => {
